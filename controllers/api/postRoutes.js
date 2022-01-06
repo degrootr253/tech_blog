@@ -15,6 +15,28 @@ router.post('/', withAuth, async (req, res) => {
     }
 });
 
+router.get('/:id', (req, res) => {
+    try {
+      const postDB = await Post.findAll({
+        where: {
+          id: req.body.id
+        }
+      });
+      res.status(200).json(postDB);
+    } catch (err) {
+      res.status(400).json(err);
+    }
+  });
+
+  router.get('/', (req, res) => {
+    try {
+      const postDB = await Post.findAll({});
+      res.status(200).json(postDB);
+    } catch (err) {
+      res.status(400).json(err);
+    }
+  });
+
 router.put('/:id', withAuth, async (req, res) => {
     try {
         const postData = await Post.update({
