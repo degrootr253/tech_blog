@@ -15,16 +15,16 @@ router.post('/', withAuth, async (req, res) => {
     }
 });
 
-router.get('/:id', (req, res) => {
+router.get('/:id', async (req, res) => {
     try {
-        const postDB = await Post.findOne({id: req.body.id}, (err) => if(err){console.log(err)});
-        res.status(200).json(postDB);
+        const postDB = await Post.findOne({ id: req.body.id })
+        res.status(200).json(postDB)
     } catch (err) {
         res.status(400).json(err);
     }
 });
 
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
     try {
         const postDB = await Post.findAll({});
         res.status(200).json(postDB);
@@ -33,9 +33,9 @@ router.get('/', (req, res) => {
     }
 });
 
-router.get('/', withAuth, (req, res) => {
+router.get('/', withAuth, async (req, res) => {
     try {
-        const postDB = await Post.findAll({user_id: req.session.user_id});
+        const postDB = await Post.findAll({ user_id: req.session.user_id });
         res.status(200).json(postDB);
     } catch (err) {
         res.status(400).json(err);

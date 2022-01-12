@@ -16,7 +16,7 @@ router.post('/', withAuth, async (req, res) => {
   }
 });
 
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const commentDB = await Comment.findAll({});
     res.status(200).json(commentDB);
@@ -25,7 +25,7 @@ router.get('/', (req, res) => {
   }
 })
 
-router.get('/:id', (req, res) => {
+router.get('/:id', async (req, res) => {
   try {
     const commentDB = await Comment.findAll({
       where: {
