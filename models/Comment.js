@@ -11,7 +11,7 @@ Comment.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    text_comment: {
+    comment_text: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
@@ -31,7 +31,10 @@ Comment.init(
             model: "post",
             key: "id"
         }
-    }
+    },
+    created_at: {
+      type: DataTypes.DATE,
+     },
   },
   {
     sequelize,
