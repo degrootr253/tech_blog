@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Post } = require('../../models');
+const { Post, User, Comment } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 router.post('/', withAuth, async (req, res) => {
@@ -17,7 +17,29 @@ router.post('/', withAuth, async (req, res) => {
 
 router.get('/:id', async (req, res) => {
     try {
-        const postDB = await Post.findOne({ id: req.body.id })
+        const postDB = await Post.findOne({
+            where: {
+                id: req.params.id
+            },
+            attributes: ['id',
+                'content',
+                'title',
+                'created_at'
+            ],
+            include: [{
+                model: User,
+                attributes: ['username']
+            },
+            {
+                model: Comment,
+                attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
+                include: {
+                    model: User,
+                    attributes: ['username']
+                }
+            }
+            ]
+        })
         res.status(200).json(postDB)
     } catch (err) {
         res.status(400).json(err);
@@ -26,8 +48,30 @@ router.get('/:id', async (req, res) => {
 
 router.get('/', async (req, res) => {
     try {
-        const postDB = await Post.findAll({});
-        res.status(200).json(postDB);
+        const postDB = await Post.findAll({
+            attributes: ['id',
+                'title',
+                'content',
+                'created_at'
+            ],
+            order: [
+                ['created_at', 'DESC']
+            ],
+            include: [{
+                model: User,
+                attributes: ['username']
+            },
+            {
+                model: Comment,
+                attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
+                include: {
+                    model: User,
+                    attributes: ['username']
+                }
+            }
+            ]
+        });
+        res.status(200).json(postDB); //.reverse()?
     } catch (err) {
         res.status(400).json(err);
     }

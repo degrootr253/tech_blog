@@ -42,7 +42,7 @@ router.put('/:id', withAuth, async (req, res) => {
   try {
       const commentData = await Comment.update({
           title: req.body.title,
-          text_comment: req.body.text_comment
+          comment_text: req.body.comment_text
       },
           {
               where: {
@@ -50,7 +50,7 @@ router.put('/:id', withAuth, async (req, res) => {
               },
           });
 
-      if (!postData) {
+      if (!commentData) {
           res.status(404).json({ message: 'No post found with this id!' });
           return;
       }

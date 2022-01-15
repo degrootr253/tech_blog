@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { User } = require('../../models');
+const { User, Post, Comment } = require('../../models');
 
 router.post('/', async (req, res) => {
   try {
@@ -32,16 +32,38 @@ router.post('/login', async (req, res) => {
     if (!validPassword) {
       res
         .status(400)
-        .json({ message: 'Incorrect email or password, please try again' });
+        .json({ message: 'Incorrect password!' });
       return;
     }
 
     req.session.save(() => {
       req.session.user_id = userData.id;
+      req.session.username = dbUserData.username;
       req.session.logged_in = true;
-      
+
       res.json({ user: userData, message: 'You are now logged in!' });
     });
+
+  } catch (err) {
+    res.status(400).json(err);
+  }
+});
+
+router.put('/:id', async (req, res) => {
+  try {
+    const userData = await User.update(req.body, {
+      individualHooks: true,
+      where: {
+        id: req.params.id
+      }
+    })
+    if (!userData) {
+      res
+        .status(400)
+        .json({ message: 'No user with this id' });
+      return;
+    }
+    res.status(200).json(userData);
 
   } catch (err) {
     res.status(400).json(err);
@@ -55,6 +77,26 @@ router.post('/logout', (req, res) => {
     });
   } else {
     res.status(404).end();
+  }
+});
+
+router.delete('/:id', async (req, res) => {
+  try {
+    const userData = await User.destroy({
+      where: {
+        id: req.params.id
+      }
+    })
+    if (!userData) {
+      res
+        .status(400)
+        .json({ message: 'No user with this id' });
+      return;
+    }
+    res.status(200).json(userData);
+
+  } catch (err) {
+    res.status(400).json(err);
   }
 });
 
