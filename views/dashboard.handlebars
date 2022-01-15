@@ -1,4 +1,4 @@
-{{#if loggedIn}}
+{{#if logged_in}}
 {{#if posts.length}}
 <section>
     <h2> {{username}}'s Posts</h2>
@@ -30,5 +30,5 @@
 
 <button type="submit" class="btn"><a class="link" href="/dashboard/new"> Add New Post</a></button>
 
-<script src="../public/javascript/addPosts.js"></script>
+<script src="/javascript/addPosts.js"></script>
 {{/if}}

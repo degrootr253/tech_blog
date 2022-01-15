@@ -35,8 +35,9 @@ router.get('/', withAuth, async (req, res) => {
     const posts = postData.map((post) => post.get({ plain: true }));
 
     // Pass serialized data and session flag into template
-    res.render('homepage', {
-      ...posts,
+    res.render('dashboard', {
+      posts,
+      username: req.session.username,
       logged_in: req.session.logged_in
     });
   } catch (err) {
@@ -46,7 +47,7 @@ router.get('/', withAuth, async (req, res) => {
 
 router.get('/edit/:id', withAuth, async (req, res) => {
   try {
-    const postData = await Post.findOne(req.params.id, {
+    const postData = await Post.findOne({
       where: {
         id: req.params.id
       },
@@ -74,7 +75,7 @@ router.get('/edit/:id', withAuth, async (req, res) => {
     const post = postData.get({ plain: true });
 
     res.render('editPost', {
-      ...post,
+      post,
       logged_in: req.session.logged_in
     });
   } catch (err) {
@@ -83,7 +84,7 @@ router.get('/edit/:id', withAuth, async (req, res) => {
 });
 
 router.get('/new', (req, res) => {
-  res.render('new-post');
+  res.render('newPost');
 });
 
 module.exports = router;

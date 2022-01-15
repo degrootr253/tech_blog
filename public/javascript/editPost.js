@@ -7,7 +7,7 @@ const newFormHandler = async (event) => {
     const id = window.location.toString().split('/')[
       window.location.toString().split('/').length - 1];
   
-    const response = await fetch(`/api/posts${id}`, {
+    const response = await fetch(`/api/posts/${id}`, {
       method: 'PUT',
       body: JSON.stringify({ post_id: id, title, content }),
       headers: {
@@ -26,4 +26,4 @@ const newFormHandler = async (event) => {
   
   document
     .querySelector('#update-btn')
-    .addEventListener('submit', newFormHandler);
+    .addEventListener('click', newFormHandler);
