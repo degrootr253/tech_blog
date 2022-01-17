@@ -52,7 +52,7 @@ Dependencies for this project are located in the [package.json](package.json) fi
 
 Make sure all the dependencies listed below are installed:
 
-`"dependencies": {
+"dependencies": {
     "bcrypt": "^5.0.0",
     "connect-session-sequelize": "^7.0.4",
     "dotenv": "^8.2.0",
@@ -61,7 +61,7 @@ Make sure all the dependencies listed below are installed:
     "express-session": "^1.17.1",
     "mysql2": "^2.2.5",
     "sequelize": "^6.13.0"
-  }`
+  }
 
 ## Usage
 To begin run..
