@@ -1,18 +1,14 @@
 # tech_blog
 
-This is a blog style site where a user can create, edit, and delete posts. They are abel to share with other users who are logged in to the account.
+This is a blog style site where a user can create, edit, and delete posts. They are able to share with other users who are logged in to the account.
 > Live demo [_here_](https://tech-blog253.herokuapp.com/). <!-- If you have the project hosted somewhere, include the link here. -->
 
 ## Table of Contents
 * [General Info](#general-information)
 * [Technologies Used](#technologies-used)
-<!-- * [Features](#features) -->
 * [Screenshots](#screenshots)
 * [Setup](#setup)
 * [Usage](#usage)
-<!-- * [Project Status](#project-status)
-* [Room for Improvement](#room-for-improvement)
-* [Acknowledgements](#acknowledgements) -->
 * [Contact](#contact)
 <!-- * [License](#license) -->
 
